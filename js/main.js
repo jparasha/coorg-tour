@@ -244,6 +244,7 @@ function postExpenseType() {
 function postExpense() {
 	let amount = document.getElementById('amount').value;
 	let date = document.getElementById('datetime').value;
+	amount = amount*1;
 	console.log(`user: ${user}.. amount: ${amount} .. date: ${date} .. expensType: ${expenseType}`);
 	let body = {
 		'user': user,
