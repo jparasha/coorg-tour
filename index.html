@@ -67,13 +67,19 @@
 			<!-- Select action -->
 			<div id="actionButtons" class="text-center" hidden>
 				<h4>Please Select a button to continue: </h4>
-				<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12 text-center " id="buttonsDiv" >				
-					<div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-						<button type="button" onclick="getExpenseButton()" id="getButton" class="btn btn-primary">Get All Expenses </button>
-					</div>
-					<div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-						<button type="button" onclick="postExpenseButton()" id="postButton" class="btn btn-primary">Post Expenses </button>
-					</div>
+				<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12 text-center " id="buttonsDiv" >	
+					<table class="table">
+						<thead>
+							<tr>
+								<td class="mainButton"><button type="button" onclick="getExpenseButton()" id="getButton" >Check Expenses </button></td>
+								<td class="mainButton"><button type="button" onclick="postExpenseButton()" id="postButton" >Submit Expense </button></td>
+							</tr>
+						</thead>
+					</table>			
+					<!-- <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+							</div>
+					<div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+						</div> -->
 				</div>
 			</div>
 			<!--Get Expense-->
@@ -104,7 +110,7 @@
 					</form>
 				</div>
 				<div class="expenses" hidden>
-					<form action="javascript: postExpense()">
+					<form action="javascript: postExpense()" class="text-center">
 						<div class="expenseDetails">
 							<!--hidden input for name-->
 							<input type="text" value="" id="user" hidden>
@@ -121,7 +127,7 @@
 							<!--submit-->
 							<input type="submit" class="btn btn-lg btn-primary" id="expenseSubmit" value="submit">
 
-							<strong id="successPost"></strong>
+							<div><strong id="successPost"></strong></div>
 							<!-- need to remove -->
 
 						</div>

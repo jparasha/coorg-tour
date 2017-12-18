@@ -32,3 +32,22 @@ body{
     padding: 20px 15px;
     text-align: center;
 }
+.mainButton{
+    padding: 10% !important;
+    margin: 5% !important;
+    color: whitesmoke !important;
+    background-color: #424242c2 !important;
+
+}
+#getButton{
+    padding: 7% 10% 7% 10%!important;
+    color: white !important;
+    background-color:#ff5722ad !important;
+    font-weight: bold!important;
+}
+#postButton{
+    padding: 7% 10% 7% 10% !important;
+    background-color: #6f4376d9 !important;
+    color: white !important;
+    font-weight: bold!important;
+}
