@@ -11,16 +11,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-	<style>
-		body {
-			padding-top: 50px;
-		}
-
-		.starter-template {
-			padding: 40px 15px;
-			text-align: center;
-		}
-	</style>
+	
 
 	<!--[if IE]>
 								<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -29,7 +20,7 @@
 </head>
 
 <body>
-	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<!-- <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -54,9 +45,9 @@
 					</li>
 				</ul>
 			</div>
-			<!--.nav-collapse -->
+			
 		</div>
-	</nav>
+	</nav> -->
 
 	<div class="container">
 		<!--22222222222222222-->
@@ -72,43 +63,44 @@
 		</div>
 		<!--333333333333333333-->
 		<!-- Body Div -->
-		<div class="col-lg-12 col-md-12 col-sm-12">
+		<div class="col-lg-12 col-md-12 col-sm-12" >
 			<!-- Select action -->
-			<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12 text-center " id="actionButtons" hidden>
+			<div id="actionButtons" class="text-center" hidden>
 				<h4>Please Select a button to continue: </h4>
-				<div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-					<button type="button" onclick="getExpenseButton()" id="getButton" class="btn btn-primary">Get All Expenses </button>
-				</div>
-				<div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-					<button type="button" onclick="postExpenseButton()" id="postButton" class="btn btn-primary">Post Expenses </button>
+				<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12 text-center " id="buttonsDiv" >				
+					<div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+						<button type="button" onclick="getExpenseButton()" id="getButton" class="btn btn-primary">Get All Expenses </button>
+					</div>
+					<div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+						<button type="button" onclick="postExpenseButton()" id="postButton" class="btn btn-primary">Post Expenses </button>
+					</div>
 				</div>
 			</div>
-
 			<!--Get Expense-->
 			<div class="getExpense" hidden>
 				<div class="currentExpense" id="currentExpense">
-
+				
 				</div>
 				<div class="expenseTable" id="expenseTable">
-
+					
 				</div>
 			</div>
 			<!--Post Expense-->
 			<div class="postExpense" hidden>
-				<div class="expenseType">
+				<div class="expenseType text-center">
 					<h3 id="expenseTypeHeader">Post your expense: </h3>
 					<form action="javascript: postExpenseType()">
 						<div class="form-group" id="expenseSelect">
 							<label for="expenseSelect" class="col-form-label">Select Expense Type:</label>
 							<select class="form-control select form-control-lg" id="expenseSelection">
-								<option  value="food">Food</option>
-								<option  value="travel">Travel</option>
-								<option  value="lodging">Lodging</option>
-								<option  value="siteseeing">Siteseeing</option>
-								<option  value="others">others</option>
+								<option value="food">Food</option>
+								<option value="travel">Travel</option>
+								<option value="lodging">Lodging</option>
+								<option value="siteseeing">Siteseeing</option>
+								<option value="others">others</option>
 							</select>
 						</div>
-						<input type="submit" id="expenseTypeSubmit" value="submit Expense Type" class="btn btn-primary">
+						<input type="submit" id="expenseTypeSubmit" value="Submit Expense Type" class="btn btn-primary">
 					</form>
 				</div>
 				<div class="expenses" hidden>
@@ -120,16 +112,18 @@
 							<label for="amount">Enter amount :</label>
 							<div class="input-group">
 								<span class="input-group-addon" id="basic-addon1">INR</span>
-								<input type="number" id="amount" class="form-control" placeholder="Amount" aria-label="amount" aria-describedby="basic-addon1" required>
+								<input type="number" id="amount" class="form-control" placeholder="Amount" aria-label="amount" aria-describedby="basic-addon1"
+								 required>
 							</div>
 							<!-- input date time -->
 							<label for="datetime">Select data and time: </label>
 							<input id="datetime" type="datetime-local" class="form-control " required>
 							<!--submit-->
 							<input type="submit" class="btn btn-lg btn-primary" id="expenseSubmit" value="submit">
-							
-								<strong id="successPost"></strong><!-- need to remove -->
-							
+
+							<strong id="successPost"></strong>
+							<!-- need to remove -->
+
 						</div>
 					</form>
 				</div>
@@ -164,6 +158,7 @@
 		</div>
 	</div>
 	<script src="js/main.js"></script>
+	<link rel="stylesheet" href="./css/style.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>

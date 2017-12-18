@@ -1,0 +1,34 @@
+body{
+    background-color: rgb(46, 45, 45);
+    color: grey;
+    padding-top:5%;
+}
+#actionButtons{
+    margin-top: 2%;
+    margin-bottom: 5%;
+}
+#buttonsDiv{
+    margin-top: 2%;
+}
+.getExpense{
+    margin-top:2% !important;
+    margin-bottom:2% !important;
+    padding: 5%;
+}
+.postExpense{
+    margin-top:2% !important;
+    margin-bottom:2% !important;
+    padding: 5%;
+}
+.expenseType{
+    margin-top: 5% !important;
+    margin-bottom: 2% !important;
+}
+#expenseTypeHeader{
+    margin-bottom: 5%;
+    margin-top: 2%;
+}
+.starter-template {
+    padding: 20px 15px;
+    text-align: center;
+}
