@@ -71,17 +71,21 @@
 					<table class="table">
 						<thead>
 							<tr>
-								<td class="mainButton"><button type="button" onclick="getExpenseButton()" id="getButton" >Check Expenses </button></td>
-								<td class="mainButton"><button type="button" onclick="postExpenseButton()" id="postButton" >Submit Expense </button></td>
+								<td class="mainButton btn btn-primary" onclick="getExpenseButton()" id="getButton" >Check Expenses </td>
+								<td class="mainButton btn btn-primary" onclick="postExpenseButton()" id="postButton"  >Submit Expense </td>
 							</tr>
 						</thead>
-					</table>			
+					</table>	
+						
 					<!-- <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
 							</div>
 					<div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
 						</div> -->
 				</div>
+				<div class="text-center"> <h3><strong  id="successPost"></strong></h3></div>	
 			</div>
+		</div>
+		<div class="col-lg-12 col-md-12 col-sm-12" >
 			<!--Get Expense-->
 			<div class="getExpense" hidden>
 				<div class="currentExpense" id="currentExpense">
@@ -93,11 +97,11 @@
 			</div>
 			<!--Post Expense-->
 			<div class="postExpense" hidden>
-				<div class="expenseType text-center">
-					<h3 id="expenseTypeHeader">Post your expense: </h3>
-					<form action="javascript: postExpenseType()">
+				<div class="expenseType ">
+					<h3 id="expenseTypeHeader" class="text-center">Post your expense: </h3>
+					<form action="javascript: postExpense()" id="postForm">
 						<div class="form-group" id="expenseSelect">
-							<label for="expenseSelect" class="col-form-label">Select Expense Type:</label>
+							<label for="expenseSelect" id="left" class="col-form-label">Select Expense Type:</label>
 							<select class="form-control select form-control-lg" id="expenseSelection">
 								<option value="food">Food</option>
 								<option value="travel">Travel</option>
@@ -106,35 +110,30 @@
 								<option value="others">others</option>
 							</select>
 						</div>
-						<input type="submit" id="expenseTypeSubmit" value="Submit Expense Type" class="btn btn-primary">
-					</form>
-				</div>
-				<div class="expenses" hidden>
-					<form action="javascript: postExpense()" class="text-center">
-						<div class="expenseDetails">
-							<!--hidden input for name-->
-							<input type="text" value="" id="user" hidden>
-							<!--input amount-->
-							<label for="amount">Enter amount :</label>
-							<div class="input-group">
-								<span class="input-group-addon" id="basic-addon1">INR</span>
-								<input type="number" id="amount" class="form-control" placeholder="Amount" aria-label="amount" aria-describedby="basic-addon1"
-								 required>
-							</div>
-							<!-- input date time -->
-							<label for="datetime">Select data and time: </label>
-							<input id="datetime" type="datetime-local" class="form-control " required>
-							<!--submit-->
-							<input type="submit" class="btn btn-lg btn-primary" id="expenseSubmit" value="submit">
-
-							<div><strong id="successPost"></strong></div>
-							<!-- need to remove -->
-
+						<input type="text" value="" id="user" hidden>
+						<!--input amount-->
+						<label for="amount" id="left">Enter amount :</label>
+						<div class="input-group">
+							<span class="input-group-addon" id="basic-addon1">INR</span>
+							<input type="number" id="amount" class="form-control" placeholder="Amount" aria-label="amount" aria-describedby="basic-addon1"
+							 required>
 						</div>
-					</form>
+						<!-- input date time -->
+						<label for="datetime" id="left">Select data and time: </label>
+						<input id="datetime" type="datetime-local" class="form-control " required>
+						<!--submit-->
+						<div class="text-center">
+							<input type="submit" class="btn btn-lg btn-primary" id="expenseSubmit" value="submit">
+						</div>
+						
+						
+						<!-- <input type="submit" id="expenseTypeSubmit" value="Submit Expense Type" class="btn btn-primary">
+					 --></form>
 				</div>
+				
 			</div>
 		</div>
+		
 		<!--1111111-->
 		<!-- Modal -->
 		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -1,7 +1,7 @@
 /*localstorage*/
 var availableStorage = true;
-//var url = 'http://10.76.17.153:8000';
-var url = 'https://coorg.herokuapp.com';
+var url = 'http://10.76.17.153:8000';
+//var url = 'https://coorg.herokuapp.com';
 var user = "there";
 var expenseType;
 if (typeof (Storage) !== "undefined") {
@@ -64,7 +64,7 @@ function modalData() {
 	function validate() {
 		if (user != undefined) {
 			user = userName;
-			console.log(` ${userName} matched`);
+			console.log(` ${userName} matched`);	
 			$('#exampleModal').modal('hide');
 			salutation();
 			let savedUser = {
@@ -94,11 +94,10 @@ function salutation() {
 
 /*----getExpenseButton---*/
 function getExpenseButton() {
-	$("#getButton").prop("disabled", true);
-	$(".postExpense").prop('hidden', true);
-	$(".getExpense").removeAttr("hidden");
-	$("#postButton").removeAttr("disabled");
+	$("#successPost").html('');
 	getExpense();
+	
+	
 	//$("#actionButtons").removeAttr('hidden');
 
 }
@@ -107,10 +106,13 @@ function getExpenseButton() {
 
 /*-----postExpenseButton------*/
 function postExpenseButton() {
+	$("#successPost").html('');
 	$("#getButton").removeAttr("disabled");
 	$(".postExpense").removeAttr('hidden');
 	$(".getExpense").prop('hidden', true);
 	$("#postButton").prop("disabled", true);
+	var goto = document.getElementsByClassName('postExpense');
+	$('html, body').animate({ scrollTop: $(goto).offset().top - 50}, 'slow');
 
 	//alert('hi');
 }
@@ -123,21 +125,21 @@ function getExpense() {
 	let body = { "test": "test" };
 	var table = `<table class="table table-responsive" id="expenseTable">
 	<thead>
-		<tr>
-			<td>Name</td>
-			<td>Amount</td>
-			<td>Spent on</td>
-			<td>Date</td>
+		<tr class ="grads">
+			<td class ="grads">Name</td>
+			<td class ="grads">Amount</td>
+			<td class ="grads">Spent on</td>
+			<td class ="grads">Date</td>
 		</tr>
 	</thead>
 	<tbody id="expenseTableTbody">`;
 	var tableFoot = `</tbody>
 	</table>`;
-	var personalTable = `<table class ="table table-responsive table-striped" id= "personalTable">
+	var personalTable = `<table class ="table table-responsive table-bordered " id= "personalTable">
 							<thead>
-								<tr>
-									<td>Total Expenses</td>
-									<td>Your Expenses</td>
+								<tr class = "grads">
+									<td class ="grads">Total Expenses</td>
+									<td class ="grads">Your Expenses</td>
 								</tr>
 							</thead>
 							<tbody id= "personalTableBody">	`;
@@ -171,11 +173,11 @@ function getExpense() {
 				personalExpenses.totalAmount.push(amt);
 				//console.log(nam);
 				var tData = `
-					<tr>
-						<td>${nam}</td>
-						<td>${amt}</td>
-						<td>${type}</td>
-						<td>${date}</td>
+					<tr onclick ="deleteRow ()" id="deleteRow">
+						<td id = "mainTable">${nam}</td>
+						<td id = "mainTable">${amt}</td>
+						<td id = "mainTable">${type}</td>
+						<td id = "mainTable">${date}</td>
 					</tr>`;//async write to table
 				rows.push(tData);
 				if (nam === user) {
@@ -197,8 +199,8 @@ function getExpense() {
 			console.log(personalExpense);
 			let tData=`
 				<tr>	
-					<td>${totalExpense}</td>
-					<td>${personalExpense}</td>
+					<td id = "mainTable">${totalExpense}</td>
+					<td id = "mainTable">${personalExpense}</td>
 				</tr>`;
 			finExpenseTable = finExpenseTable +tData+tableFoot;
 			function sum(amount) {
@@ -212,13 +214,22 @@ function getExpense() {
 
 
 		}).then(function () {
-			finalTable = finalTable + tableFoot;
+			let waiting = `<h2>Expenses: </h2>	`;
+			let personalWaiting = `<h2>${user}'s Expenses: </h2>`;
+			finalTable = waiting + finalTable + tableFoot;
+			finExpenseTable =personalWaiting+finExpenseTable;
+			$("#getButton").prop("disabled", true);
+			$(".postExpense").prop('hidden', true);
+			$(".getExpense").removeAttr("hidden");
+			$("#postButton").removeAttr("disabled");
 
 			//$('#expenseTable').html(finalTable);
 			let personalHtml = document.getElementById('currentExpense');
 			personalHtml.innerHTML = finExpenseTable;
 			let htm = document.getElementById('expenseTable');
 			htm.innerHTML = finalTable;
+			var goto = document.getElementsByClassName('currentExpense');
+			$('html, body').animate({ scrollTop: $(goto).offset().top - 50}, 'slow');
 			//console.log(htm);
 			//console.log(finalTable);
 			//			
@@ -234,18 +245,19 @@ function getExpense() {
 }
 
 /* ----------postExpenseType--------- */
-function postExpenseType() {
-	expenseType = document.getElementById('expenseSelection').value;
+/* function postExpenseType() {
+	
 	$(".expenses").removeAttr('hidden');
-}
+} */
 
 /* -------postExpense-------- */
 
 function postExpense() {
+	expenseType = document.getElementById('expenseSelection').value;
 	let amount = document.getElementById('amount').value;
 	let date = document.getElementById('datetime').value;
-	amount = amount*1;
-	console.log(`user: ${user}.. amount: ${amount} .. date: ${date} .. expensType: ${expenseType}`);
+	amount = amount*1;	
+	//console.log(`user: ${user}.. amount: ${amount} .. date: ${date} .. expensType: ${expenseType}`);
 	let body = {
 		'user': user,
 		'date': date,
@@ -265,9 +277,9 @@ function postExpense() {
 		}).then(function (response) {
 			return response.json();
 		}).then(function (data) {
-			console.log(data);
-			//user = data.name;////////
-			console.log(user);
+			
+			$(".postExpense").prop('hidden', true);			
+			$("#postButton").removeAttr("disabled");
 			let succs = document.getElementById('successPost');
 			succs.innerHTML = data.msg;
 			//validate();
@@ -279,4 +291,10 @@ function postExpense() {
 	catch (error) {
 		console.log(error);
 	}
+}
+
+/* -----delete Row and data  */
+
+function deleteRow(){
+	alert(`this will delete ${user}'s entry  `);
 }
