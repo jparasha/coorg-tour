@@ -1,7 +1,16 @@
 /*localstorage*/
 var availableStorage = true;
-var url = 'http://10.76.17.153:8000';
-//var url = 'https://coorg.herokuapp.com';
+var url;
+//
+var currentLocation = window.location.protocol;
+console.log(currentLocation);
+if(currentLocation == "https:"){
+	 url = 'https://coorg.herokuapp.com';
+}
+else{
+	 url = 'http://10.76.17.153:8000';
+}
+console.log(url);
 var user = "there";
 var expenseType;
 if (typeof (Storage) !== "undefined") {
