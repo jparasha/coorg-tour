@@ -1,7 +1,7 @@
 /*localstorage*/
 var availableStorage = true;
-//var url = 'http://10.76.17.153:8000';
-var url = 'https://coorg.herokuapp.com';
+var url = 'http://10.76.17.153:8000';
+//var url = 'https://coorg.herokuapp.com';
 var user = "there";
 var expenseType;
 if (typeof (Storage) !== "undefined") {
@@ -266,6 +266,7 @@ function postExpense() {
 	};
 	localStorage.setItem('expenses', JSON.stringify(body));
 	let uri = `${url}/postExpense`;
+	$("#postForm")[0].reset();
 	try {
 		fetch(uri, {
 			method: "post",
