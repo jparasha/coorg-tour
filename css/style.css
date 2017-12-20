@@ -92,6 +92,12 @@ body{
 #deleteRow{
     cursor: pointer;
 }
+.table-hover>tbody>tr:hover {
+	background-color: #2a6598!important
+}
+/* #deleteRow :hover{
+    background-color: rebeccapurple !important;
+} */
 #mainTable{
     padding: 2% !important;
     text-align: center !important;

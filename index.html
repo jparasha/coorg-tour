@@ -6,12 +6,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="">
+	<meta name="theme-color" content="#424242c2">
 	<title>Expense Manger</title>
 	<link rel="shortcut icon" href="">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+	 crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-	
+
 
 	<!--[if IE]>
 								<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -63,36 +65,40 @@
 		</div>
 		<!--333333333333333333-->
 		<!-- Body Div -->
-		<div class="col-lg-12 col-md-12 col-sm-12" >
+		<div class="col-lg-12 col-md-12 col-sm-12">
 			<!-- Select action -->
 			<div id="actionButtons" class="text-center" hidden>
 				<h4>Please Select a button to continue: </h4>
-				<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12 text-center " id="buttonsDiv" >	
+				<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12 text-center " id="buttonsDiv">
 					<table class="table">
 						<thead>
 							<tr>
-								<td class="mainButton btn btn-primary" onclick="getExpenseButton()" id="getButton" >Check Expenses </td>
-								<td class="mainButton btn btn-primary" onclick="postExpenseButton()" id="postButton"  >Submit Expense </td>
+								<td class="mainButton btn btn-primary" onclick="getExpenseButton()" id="getButton">Check Expenses </td>
+								<td class="mainButton btn btn-primary" onclick="postExpenseButton()" id="postButton">Submit Expense </td>
 							</tr>
 						</thead>
-					</table>	
-						
+					</table>
+
 					<!-- <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
 							</div>
 					<div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
 						</div> -->
 				</div>
-				<div class="text-center"> <h3><strong  id="successPost"></strong></h3></div>	
+				<div class="text-center">
+					<h3>
+						<strong id="successPost"></strong>
+					</h3>
+				</div>
 			</div>
 		</div>
-		<div class="col-lg-12 col-md-12 col-sm-12" >
+		<div class="col-lg-12 col-md-12 col-sm-12">
 			<!--Get Expense-->
 			<div class="getExpense" hidden>
 				<div class="currentExpense" id="currentExpense">
-				
+
 				</div>
 				<div class="expenseTable" id="expenseTable">
-					
+
 				</div>
 			</div>
 			<!--Post Expense-->
@@ -125,15 +131,16 @@
 						<div class="text-center">
 							<input type="submit" class="btn btn-lg btn-primary" id="expenseSubmit" value="submit">
 						</div>
-						
-						
+
+
 						<!-- <input type="submit" id="expenseTypeSubmit" value="Submit Expense Type" class="btn btn-primary">
-					 --></form>
+					 -->
+					</form>
 				</div>
-				
+
 			</div>
 		</div>
-		
+
 		<!--1111111-->
 		<!-- Modal -->
 		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -146,7 +153,7 @@
 						<div class="modal-body">
 
 							<div class="form-group">
-								<label for="userName" class="col-form-label">Your Name Please:</label>
+								<label for="userName" class="col-form-label">Your Id Please:</label>
 								<input type="text" class="form-control" id="modalUserName" required>
 							</div>
 
@@ -161,10 +168,26 @@
 				</div>
 			</div>
 		</div>
+		<div class="modal fade" id="warnUserModal" tabindex="-1" role="dialog" aria-labelledby="warnUserModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h2 id="heyUser"></h2>
+					</div>
+					<div class="modal-body">
+						<h3><strong id="warnMessage"></strong></h3>
+					</div>
+					<div class="modal-footer">
+						<button type="button" id="modalClose" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="button" id="warnModalSubmit" onclick="deleteExpense()" class="btn btn-danger" data-target="#warnUserModal" hidden>Delete </button>
+					</div>
+
+				</div>
+			</div>
+		</div>
 	</div>
 	<script src="js/main.js"></script>
 	<link rel="stylesheet" href="./css/style.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 

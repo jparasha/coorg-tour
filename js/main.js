@@ -1,14 +1,16 @@
 /*localstorage*/
 var availableStorage = true;
 var url;
+var deleteId = "";
+var deleteRows = "";
 //
 var currentLocation = window.location.protocol;
 console.log(currentLocation);
-if(currentLocation == "https:"){
-	 url = 'https://coorg.herokuapp.com';
+if (currentLocation == "https:") {
+	url = 'https://coorg.herokuapp.com';
 }
-else{
-	 url = 'http://10.76.17.153:8000';
+else {
+	url = 'http://10.76.17.153:8000';
 }
 console.log(url);
 var user = "there";
@@ -73,7 +75,7 @@ function modalData() {
 	function validate() {
 		if (user != undefined) {
 			user = userName;
-			console.log(` ${userName} matched`);	
+			console.log(` ${userName} matched`);
 			$('#exampleModal').modal('hide');
 			salutation();
 			let savedUser = {
@@ -105,8 +107,8 @@ function salutation() {
 function getExpenseButton() {
 	$("#successPost").html('');
 	getExpense();
-	
-	
+
+
 	//$("#actionButtons").removeAttr('hidden');
 
 }
@@ -121,7 +123,7 @@ function postExpenseButton() {
 	$(".getExpense").prop('hidden', true);
 	$("#postButton").prop("disabled", true);
 	var goto = document.getElementsByClassName('postExpense');
-	$('html, body').animate({ scrollTop: $(goto).offset().top - 50}, 'slow');
+	$('html, body').animate({ scrollTop: $(goto).offset().top - 50 }, 'slow');
 
 	//alert('hi');
 }
@@ -132,7 +134,7 @@ function postExpenseButton() {
 function getExpense() {
 	let uri = `${url}/getExpense`;
 	let body = { "test": "test" };
-	var table = `<table class="table table-responsive" id="expenseTable">
+	var table = `<table class="table table-hover table-responsive" id="expenseTable">
 	<thead>
 		<tr class ="grads">
 			<td class ="grads">Name</td>
@@ -182,11 +184,12 @@ function getExpense() {
 				personalExpenses.totalAmount.push(amt);
 				//console.log(nam);
 				var tData = `
-					<tr onclick ="deleteRow ()" id="deleteRow">
-						<td id = "mainTable">${nam}</td>
+					<tr onclick ="deleteRow (this, '${element._id}')" id="deleteRow">
+						<td id = "mainTable" value= "${nam}">${nam}</td>
 						<td id = "mainTable">${amt}</td>
 						<td id = "mainTable">${type}</td>
 						<td id = "mainTable">${date}</td>
+						<td id = "mainTable hiddenTd" hidden>${element._id}</td>
 					</tr>`;//async write to table
 				rows.push(tData);
 				if (nam === user) {
@@ -206,12 +209,12 @@ function getExpense() {
 			let personalExpense = sum(personalExpenses.PersonalAmount);
 			console.log(totalExpense);
 			console.log(personalExpense);
-			let tData=`
+			let tData = `
 				<tr>	
 					<td id = "mainTable">${totalExpense}</td>
 					<td id = "mainTable">${personalExpense}</td>
 				</tr>`;
-			finExpenseTable = finExpenseTable +tData+tableFoot;
+			finExpenseTable = finExpenseTable + tData + tableFoot;
 			function sum(amount) {
 				console.log(amount);
 				var sum = 0;
@@ -223,10 +226,10 @@ function getExpense() {
 
 
 		}).then(function () {
-			let waiting = `<h2>Expenses: </h2>	`;
+			let waiting = `<h2>Expenses: </h2> <h5><i>(Click or tap a row to delete, you can delete only yours!)</i> </h5>	`;
 			let personalWaiting = `<h2>${user}'s Expenses: </h2>`;
 			finalTable = waiting + finalTable + tableFoot;
-			finExpenseTable =personalWaiting+finExpenseTable;
+			finExpenseTable = personalWaiting + finExpenseTable;
 			$("#getButton").prop("disabled", true);
 			$(".postExpense").prop('hidden', true);
 			$(".getExpense").removeAttr("hidden");
@@ -238,7 +241,7 @@ function getExpense() {
 			let htm = document.getElementById('expenseTable');
 			htm.innerHTML = finalTable;
 			var goto = document.getElementsByClassName('currentExpense');
-			$('html, body').animate({ scrollTop: $(goto).offset().top - 50}, 'slow');
+			$('html, body').animate({ scrollTop: $(goto).offset().top - 50 }, 'slow');
 			//console.log(htm);
 			//console.log(finalTable);
 			//			
@@ -265,7 +268,7 @@ function postExpense() {
 	expenseType = document.getElementById('expenseSelection').value;
 	let amount = document.getElementById('amount').value;
 	let date = document.getElementById('datetime').value;
-	amount = amount*1;	
+	amount = amount * 1;
 	//console.log(`user: ${user}.. amount: ${amount} .. date: ${date} .. expensType: ${expenseType}`);
 	let body = {
 		'user': user,
@@ -287,8 +290,8 @@ function postExpense() {
 		}).then(function (response) {
 			return response.json();
 		}).then(function (data) {
-			
-			$(".postExpense").prop('hidden', true);			
+
+			$(".postExpense").prop('hidden', true);
 			$("#postButton").removeAttr("disabled");
 			let succs = document.getElementById('successPost');
 			succs.innerHTML = data.msg;
@@ -305,6 +308,90 @@ function postExpense() {
 
 /* -----delete Row and data  */
 
-function deleteRow(){
-	alert(`this will delete ${user}'s entry  `);
+function deleteRow(y, x) {
+	document.getElementById('warnModalSubmit').style.visibility = 'visible';
+	deleteId = x;
+	deleteRows = y;
+	let deleteEntryOfUser = $(y).children("td:first-child").attr("value");
+	$('#heyUser').html(`Hey ${user}!`);
+	if (deleteEntryOfUser === user) {
+		var warnText = `This may delete your entry!
+		Are You sure ??`;
+		$('#warnModalSubmit').removeAttr('disabled');
+		$('#warnMessage').html(warnText);
+		$('#warnUserModal').modal('show');
+	}
+	else {
+		$("#warnModalSubmit").prop("disabled", true);
+		var warnText = `Sorry, You are not authorised to delete! 
+		This is ${deleteEntryOfUser}'s Expense!`;
+		$('#warnMessage').html(warnText);
+		$('#warnUserModal').modal('show');
+
+	}
+	//console.log();
+
+
+
+
+
+
+	//console.log('hi');
+	//alert(`this will delete ${user}'s entry  `);
+
+}
+function deleteExpense() {
+	//$('#heyUser').html(`Hey ${user}!`);
+	var msgs = "Couldn't delete for some reason, sorry about that!";
+	//$("#warnModalSubmit").prop("hidden", true);
+
+	document.getElementById('warnModalSubmit').style.visibility = 'hidden';
+	$('#warnUserModal').modal('hide');
+	//call db
+	let uri = `${url}/deleteExpense?id=${deleteId}`;
+	
+	try {
+		//console.log(uri);
+		fetch(uri, {
+			method: "get"
+		}).then(function (response) {
+			return response.json();
+		}).then(function (data) {
+			console.log(data);
+			if (data.msg != undefined) {
+				msgs = data.msg;
+			}
+			$('#warnMessage').html(msgs);
+			//console.log(deleteRows);
+			deleteRowFromView();
+			//$('modalClose').attr('onClick','fireGet()');
+			//$('#warnUserModal').modal('show');
+			
+		}).catch(function (err) {
+			//msgs= data.msg;
+			$('#warnMessage').html(msgs);
+			console.log(err);
+			$('#warnUserModal').modal('show');
+			//validate();
+		});
+	}
+	catch (error) {
+		//console.log('here');
+		console.log(error);
+		$('#warnMessage').html(msgs);
+		$('#warnUserModal').modal('show');
+
+	}
+
+
+
+}
+
+function deleteRowFromView(){
+	console.log(deleteRows.parentNode);
+	deleteRows.parentNode.removeChild(deleteRows);
+}
+
+function closeModal(){
+	$('#warnUserModal').modal('hide');
 }
