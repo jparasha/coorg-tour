@@ -180,7 +180,7 @@ function getExpense() {
 				var amt = element.amount;
 				var nam = element.user;
 				var type = element.expenseType;
-				var date = element.date;
+				var date = getlocalDate(element.date);
 				personalExpenses.totalAmount.push(amt);
 				//console.log(nam);
 				var tData = `
@@ -201,9 +201,12 @@ function getExpense() {
 		}).then(function () {
 			finalTable = table;//assigning table head values to finaltable
 			finExpenseTable = personalTable;
-			rows.forEach(function (element) {
+			for (var j = rows.length - 1; j >= 0; --j){
+				finalTable=finalTable+ rows[j];
+			}
+			/* rows.forEach(function (element) {
 				finalTable = finalTable + element;
-			}, this);
+			}, this); */
 			//adding up all amount spent
 			let totalExpense = sum(personalExpenses.totalAmount);
 			let personalExpense = sum(personalExpenses.PersonalAmount);
@@ -394,4 +397,9 @@ function deleteRowFromView(){
 
 function closeModal(){
 	$('#warnUserModal').modal('hide');
+}
+function getlocalDate(dates){
+	var expD = new Date(dates);
+	 var finalDate = expD.toLocaleDateString().replace(/\//g, '-');
+	return finalDate;
 }
